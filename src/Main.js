@@ -67,7 +67,7 @@ function Main() {
           gap: "3rem",
         }}
       >
-       
+
         <Title>
           OCEAN
           <br /> STORY
