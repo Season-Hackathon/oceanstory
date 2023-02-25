@@ -4,7 +4,6 @@ import Styled from "styled-components";
 import axios from "axios";
 import Button from "../common/Button";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
 const Background = Styled.div`
   height: 1000px;
@@ -25,7 +24,7 @@ const FromBox = Styled.div`
   height: 56.64px;
   top: 50px;
   margin: auto;
-  background: white;
+  background: #C7D0FD;
   border-radius: 53px;
 `;
 
@@ -38,7 +37,7 @@ const FromText = Styled.input`
   border: 0;
   border-bottom:1;
   outline: 0;
-  background: white;
+  background: #C7D0FD;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
@@ -56,7 +55,7 @@ const LetterBox = Styled.div`
   height: 554px;
   top: 82px;
   margin: auto;
-  background: #FFFBEB;
+  background: #C7D0FD;
   border-radius: 39px;
 `;
 
@@ -82,7 +81,7 @@ const Who = Styled.div`
   border: 0;
   border-bottom:1;
   outline: 0;
-  background: #FFFBEB;
+  background: #C7D0FD;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
@@ -112,7 +111,7 @@ const Writer = Styled.input`
   border-top-width:0;
   border-bottom-width:1;  
   outline: 0;
-  background: #FFFBEB;
+  background: #C7D0FD;
 `;
 
 function WriteLetter() {
@@ -122,27 +121,10 @@ function WriteLetter() {
     navigate(link);
   };
 
-  const [sender, setSender] = useState("");
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-
   return (
     <Background className="Background">
       <FromBox>
-        <FromText
-          placeholder="편지를 보낼 대상을 검색하세요"
-          onClick={() => {
-            axios({
-              method: "GET",
-              url: `http://127.0.0.1:8000/letter/search/cjsalsdn/`,
-              data: {},
-            })
-              .then((response) => {
-                console.log(response);
-              })
-              .catch((error) => console.log(error));
-          }}
-        ></FromText>
+        <FromText placeholder="편지를 보낼 대상을 검색하세요"></FromText>
         <Search>
           <img
             src={process.env.PUBLIC_URL + "/img/search.png"}
@@ -152,18 +134,10 @@ function WriteLetter() {
       </FromBox>
       <LetterBox>
         <Who>
-          작성자:&nbsp;
-          <Writer onChange={(e) => setSender(e.target.value)} value={sender} />
+          작성자: &nbsp;
+          <Writer />
         </Who>
-        <Who>
-          제목:&nbsp;
-          <Writer onChange={(e) => setTitle(e.target.value)} value={title} />
-        </Who>
-        <Text
-          placeholder="내용을 입력하세요"
-          onChange={(e) => setContent(e.target.value)}
-          value={content}
-        />
+        <Text placeholder="내용을 입력하세요" />
       </LetterBox>
       <div
         style={{
@@ -181,21 +155,6 @@ function WriteLetter() {
           width={"70%"}
           onClickEvent={() => {
             goPage(`/SuccessfullySended`);
-          }}
-          onClick={() => {
-            axios({
-              method: "POST",
-              url: `http://127.0.0.1:8000/letter/send/choimj/`,
-              data: {
-                sender: sender,
-                title: title,
-                content: content,
-              },
-            })
-              .then((response) => {
-                console.log(response);
-              })
-              .catch((error) => console.log(error));
           }}
         ></Button>
       </div>

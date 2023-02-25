@@ -1,29 +1,98 @@
 import React from "react";
-// import ReactDOM from "react-dom";
-import Styled from "styled-components";
-
-//height: 511.69px; 임시로 1000px 설정해놓은것
-const Background = Styled.div`
+import { ReactDOM } from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { useState } from "react";
+import { useEffect } from "react";
+import Button from "../common/Button";
+//Background CSS 바꿀것
+//height: 511.69px;
+const Background = styled.div`
   height: 1000px;
-  background: linear-gradient(
-      187.08deg,
-      #91c7ff 5.52%,
-      rgba(255, 255, 255, 0) 106.67%
-    ),
-    #bfb0ff;
 `;
 
-//username, password쓰는 곳이랑 파란색 signin버튼 묶어놓음
-const Div = Styled.div`
+const Talk = styled.div`
   position: relative;
-  top: 330px;
-  align-items: center;
-  text-align: center;
-  justify-content: space-between;
+  width: 341px;
+  height: 125px;
+  top: 195px;
+  background: white;
+  border-radius: 53px;
+  margin: auto;
 `;
 
-function SuccessfullySended() {
-  return <Background className="Background"></Background>;
+const TalkLetter = styled.div`
+  position: relative;
+  width: 311px;
+  height: 87px;
+  top: 30px;
+  margin: auto;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 133.19%;
+  letter-spacing: 0.1em;
+  color: #000000;
+  text-align: center;
+`;
+
+const Chracter = styled.div`
+  position: relative;
+  width: 127px;
+  height: 211px;
+  top: 230px;
+  margin: auto;
+`;
+
+/////////////////////////////////////////////////////////////////////////
+
+function Main() {
+  const navigate = useNavigate();
+
+  const goPage = (link) => {
+    navigate(link);
+  };
+
+  //백엔드에서 이름 받아오기?
+  return (
+    <div className="Main">
+      <Background>
+        <Talk>
+          <TalkLetter>
+            편지는 잘 전달 했어!
+            <br />
+            XX(이)는 내일
+            <br />
+            편지를 열어 볼수 있을거야!
+          </TalkLetter>
+        </Talk>
+        <Chracter>
+          <img
+            src={process.env.PUBLIC_URL + "/img/example.png"}
+            alt="exampleIMG"
+          />
+        </Chracter>
+        <div
+          style={{
+            marginTop: "320px",
+            flex: "0 0 35%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "1rem",
+          }}
+        >
+          <Button
+            text={"메인 화면으로 돌아가기"}
+            width={"70%"}
+            onClickEvent={() => {
+              goPage(`/`);
+            }}
+          ></Button>
+        </div>
+      </Background>
+    </div>
+  );
 }
 
-export default SuccessfullySended;
+export default Main;
